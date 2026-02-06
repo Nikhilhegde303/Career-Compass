@@ -1,3 +1,4 @@
+/* Global styles */
 * {
   margin: 0;
   padding: 0;
@@ -8,129 +9,18 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  min-height: 100vh;
-  color: #333;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.app {
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* Utility classes */
+.container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
-}
-
-.header {
-  text-align: center;
-  padding: 2rem 0;
-  margin-bottom: 2rem;
-}
-
-.header h1 {
-  font-size: 3rem;
-  color: #2d3748;
-  margin-bottom: 0.5rem;
-}
-
-.header p {
-  font-size: 1.2rem;
-  color: #4a5568;
-  opacity: 0.9;
-}
-
-.main {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.status-card {
-  background: white;
-  border-radius: 12px;
-  padding: 2rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.status-card h2 {
-  color: #2d3748;
-  margin-bottom: 1.5rem;
-  font-size: 1.8rem;
-}
-
-.status-item {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.8rem 0;
-  border-bottom: 1px solid #e2e8f0;
-}
-
-.status-item:last-child {
-  border-bottom: none;
-}
-
-.status-item span:first-child {
-  font-weight: 500;
-  color: #4a5568;
-}
-
-.status-success {
-  color: #38a169;
-  font-weight: 600;
-}
-
-.status-error {
-  color: #e53e3e;
-  font-weight: 600;
-}
-
-.status-loading {
-  color: #d69e2e;
-  font-weight: 600;
-}
-
-.next-steps {
-  background: white;
-  border-radius: 12px;
-  padding: 2rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.next-steps h3 {
-  color: #2d3748;
-  margin-bottom: 1.5rem;
-  font-size: 1.5rem;
-}
-
-.next-steps ol {
-  margin-left: 1.5rem;
-}
-
-.next-steps li {
-  padding: 0.5rem 0;
-  color: #4a5568;
-  font-size: 1.1rem;
-}
-
-.next-steps li::marker {
-  font-weight: bold;
-  color: #667eea;
-}
-
-.footer {
-  text-align: center;
-  padding: 2rem 0;
-  margin-top: 2rem;
-  color: #718096;
-  border-top: 1px solid #e2e8f0;
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-  .header h1 {
-    font-size: 2.2rem;
-  }
-  
-  .status-item {
-    flex-direction: column;
-    gap: 0.3rem;
-  }
+  padding: 0 20px;
 }

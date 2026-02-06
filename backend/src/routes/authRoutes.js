@@ -1,52 +1,30 @@
-const express = require('express');
+import express from 'express';
+import AuthController from '../controllers/authController.js';
+import { authSchemas, validate } from '../middleware/validation.js';
+
 const router = express.Router();
 
-// Test route
-router.get('/test', (req, res) => {
-  res.json({ 
-    message: 'Auth routes are working!',
-    endpoints: {
-      register: 'POST /api/auth/register',
-      login: 'POST /api/auth/login',
-      profile: 'GET /api/auth/profile'
-    }
-  });
-});
+// Register route
+router.post(
+  '/register',
+  validate(authSchemas.register), // Validate input
+  AuthController.register
+);
 
-// User registration (placeholder)
-router.post('/register', (req, res) => {
-  const { email, password, name } = req.body;
-  
-  // Basic validation
-  if (!email || !password || !name) {
-    return res.status(400).json({ 
-      error: 'Missing required fields',
-      required: ['email', 'password', 'name'] 
-    });
-  }
-  
+// Login route
+router.post(
+  '/login',
+  validate(authSchemas.login), // Validate input
+  AuthController.login
+);
+
+// Health check route (for testing)
+router.get('/health', (req, res) => {
   res.json({
-    message: 'User registered successfully (placeholder)',
-    user: { email, name },
-    note: 'Database integration coming in next step'
+    status: 'success',
+    message: 'Auth routes are working',
+    timestamp: new Date().toISOString()
   });
 });
 
-// User login (placeholder)
-router.post('/login', (req, res) => {
-  const { email, password } = req.body;
-  
-  if (!email || !password) {
-    return res.status(400).json({ 
-      error: 'Email and password required' 
-    });
-  }
-  
-  res.json({
-    message: 'Login successful (placeholder)',
-    token: 'dummy-jwt-token-for-now',
-    user: { email, name: 'John Doe' }
-  });
-});
-
-module.exports = router;
+export default router;

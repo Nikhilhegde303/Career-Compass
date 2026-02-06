@@ -1,79 +1,66 @@
-const express = require('express');
-const cors = require('cors');
-const dotenv = require('dotenv');
-const authRoutes = require('./src/routes/authRoutes');
+import express from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import authRoutes from './src/routes/authRoutes.js';
+import protectedRoutes from './src/routes/protectedRoutes.js';
+import resumeRoutes from './src/routes/resumeRoutes.js';
+import errorHandler from './src/middleware/errorHandler.js';
 
 // Load environment variables
 dotenv.config();
 
+// Create Express app
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// ========== MIDDLEWARE ==========
-app.use(cors({
-  origin: process.env.CORS_ORIGIN || 'http://localhost:3000',
-  credentials: true
-}));
+// Middleware
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// ========== BASIC ROUTES ==========
-
-
-app.get('/', (req, res) => {
-  res.json({
-    message: '🎯 Career Compass API',
-    version: '1.0.0',
-    status: 'operational',
-    documentation: 'Coming soon...'
-  });
-});
-
+// Health check endpoint
 app.get('/api/health', (req, res) => {
   res.json({
-    status: 'healthy',
+    status: 'success',
+    message: 'Career Compass API is running',
     timestamp: new Date().toISOString(),
-    uptime: process.uptime()
+    environment: process.env.NODE_ENV
   });
 });
 
-// ========== API ROUTES ==========
-// We'll add these later
+// API Routes
 app.use('/api/auth', authRoutes);
 
-app.get('/api/test', (req, res) => {
-  res.json({ message: 'API is working!' });
-});
+app.use('/api/protected', protectedRoutes);
 
-// ========== ERROR HANDLING ==========
-// 404 handler
+// Add to route registration (after authRoutes)
+app.use('/api/resumes', resumeRoutes);
+
+// 404 Handler for undefined routes - FIXED VERSION
 app.use((req, res) => {
   res.status(404).json({
-    error: 'Not Found',
-    message: `Route ${req.method} ${req.url} not found`
+    status: 'fail',
+    message: `Route ${req.originalUrl} not found`
   });
 });
 
-// Error handler
-app.use((err, req, res, next) => {
-  console.error('Server Error:', err);
-  res.status(500).json({
-    error: 'Internal Server Error',
-    message: process.env.NODE_ENV === 'development' ? err.message : 'Something went wrong'
-  });
-});
+// Global Error Handler (MUST be last middleware)
+app.use(errorHandler);
 
-// ========== START SERVER ==========
+// Start server
 app.listen(PORT, () => {
-  console.log(`
-  🚀 Career Compass Backend Server
-  📍 Port: ${PORT}
-  🌐 Environment: ${process.env.NODE_ENV || 'development'}
-  ⏰ Started: ${new Date().toLocaleString()}
-  
-  🔗 Test Endpoints:
-     • Home: http://localhost:${PORT}/
-     • Health: http://localhost:${PORT}/api/health
-     • API Test: http://localhost:${PORT}/api/test
-  `);
+  console.log(`🚀 Server running on port ${PORT}`);
+  console.log(`📁 Environment: ${process.env.NODE_ENV}`);
+  console.log(`🔗 Health check: http://localhost:${PORT}/api/health`);
+  console.log(`🔗 Auth health: http://localhost:${PORT}/api/auth/health`);
 });
+
+// Handle unhandled promise rejections
+process.on('unhandledRejection', (err) => {
+  console.error('UNHANDLED REJECTION! 💥', err.name, err.message);
+  process.exit(1);
+});
+
+
+
+

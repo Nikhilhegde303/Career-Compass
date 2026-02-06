@@ -1,0 +1,52 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                 String    @id @default(uuid()) @map("user_id")
+  email              String    @unique
+  password_hash      String
+  email_verified     Boolean   @default(false)
+  name               String
+  role               UserRole  @default(USER)
+  is_active          Boolean   @default(true)
+  verification_token String?
+  reset_token        String?
+  reset_token_expiry DateTime?
+  created_at         DateTime  @default(now())
+  updated_at         DateTime  @updatedAt
+  last_login_at      DateTime?
+  resumes            Resume[]  // ADD THIS LINE
+
+  @@index([email])
+  @@index([role])
+  @@index([created_at])
+  @@map("users")
+}
+
+// ADD THIS ENTIRE MODEL
+model Resume {
+  id         String   @id @default(uuid())
+  user_id    String   // Changed from userId to user_id to match your convention
+  title      String
+  template_id String  @default("modern") @map("templateId")
+  content    Json
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  
+  @@index([user_id])
+  @@map("resumes")
+}
+
+enum UserRole {
+  USER
+  ADMIN
+  CAREER_COUNSELOR
+}
