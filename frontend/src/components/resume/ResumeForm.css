@@ -198,3 +198,37 @@
 .btn-remove-small:hover {
   background: #e64a19;
 }
+
+/* Add at the end of the file */
+
+.skills-helper-text {
+  background: #e3f2fd;
+  border-left: 4px solid #2196f3;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 4px;
+  color: #1976d2;
+  font-size: 0.9rem;
+}
+
+.skills-helper-text kbd {
+  background: white;
+  border: 1px solid #ddd;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-family: monospace;
+  font-size: 0.85rem;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.skills-textarea {
+  font-family: inherit;
+  line-height: 1.6;
+  resize: vertical;
+}
+
+.skills-textarea::placeholder {
+  color: #999;
+  font-style: italic;
+  line-height: 1.8;
+}

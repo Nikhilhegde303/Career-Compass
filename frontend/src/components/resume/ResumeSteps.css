@@ -67,3 +67,22 @@
 .step-item.active .step-label {
   color: #1976d2;
 }
+
+/* Add to existing file */
+
+.step-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.required-badge {
+  font-size: 0.7rem;
+  color: #ff9800;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.step-item.completed .required-badge {
+  display: none;
+}

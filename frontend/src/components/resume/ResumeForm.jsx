@@ -371,49 +371,68 @@ function ResumeForm({ currentStep, data, onUpdateData }) {
   };
 
   const renderSkills = () => {
-    const skills = data.skills || { technical: [], soft: [], languages: [] };
+  const skills = data.skills || { technical: [], soft: [], languages: [] };
 
-    const updateSkillCategory = (category, value) => {
-      const skillsArray = value.split(',').map(s => s.trim()).filter(s => s);
-      onUpdateData('skills', { ...skills, [category]: skillsArray });
-    };
-
-    return (
-      <div className="form-content">
-        <h2>Skills</h2>
-        <div className="form-group">
-          <label>Technical Skills</label>
-          <textarea
-            value={skills.technical?.join(', ') || ''}
-            onChange={(e) => updateSkillCategory('technical', e.target.value)}
-            placeholder="JavaScript, React, Node.js, Python, SQL (separate with commas)"
-            rows="3"
-          />
-          <small>Separate skills with commas</small>
-        </div>
-        <div className="form-group">
-          <label>Soft Skills</label>
-          <textarea
-            value={skills.soft?.join(', ') || ''}
-            onChange={(e) => updateSkillCategory('soft', e.target.value)}
-            placeholder="Leadership, Communication, Problem Solving (separate with commas)"
-            rows="3"
-          />
-          <small>Separate skills with commas</small>
-        </div>
-        <div className="form-group">
-          <label>Languages</label>
-          <textarea
-            value={skills.languages?.join(', ') || ''}
-            onChange={(e) => updateSkillCategory('languages', e.target.value)}
-            placeholder="English (Native), Spanish (Fluent), French (Intermediate)"
-            rows="2"
-          />
-          <small>Separate languages with commas</small>
-        </div>
-      </div>
-    );
+  const updateSkillCategory = (category, value) => {
+    // Split by newlines first, then by commas, then filter empty
+    const skillsArray = value
+      .split(/[\n,]+/) // Split by newline OR comma
+      .map(s => s.trim())
+      .filter(s => s.length > 0);
+    
+    onUpdateData('skills', { ...skills, [category]: skillsArray });
   };
+
+  const getSkillsDisplayValue = (skillsArray) => {
+    // Display each skill on a new line
+    return skillsArray?.join('\n') || '';
+  };
+
+  return (
+    <div className="form-content">
+      <h2>Skills</h2>
+      <p className="skills-helper-text">
+        💡 <strong>Tip:</strong> Press <kbd>Enter</kbd> after each skill, or separate with commas
+      </p>
+      
+      <div className="form-group">
+        <label>Technical Skills</label>
+        <textarea
+          value={getSkillsDisplayValue(skills.technical)}
+          onChange={(e) => updateSkillCategory('technical', e.target.value)}
+          placeholder="JavaScript&#10;React&#10;Node.js&#10;Python&#10;SQL"
+          rows="5"
+          className="skills-textarea"
+        />
+        <small>Press Enter after each skill or use commas to separate</small>
+      </div>
+
+      <div className="form-group">
+        <label>Soft Skills</label>
+        <textarea
+          value={getSkillsDisplayValue(skills.soft)}
+          onChange={(e) => updateSkillCategory('soft', e.target.value)}
+          placeholder="Leadership&#10;Communication&#10;Problem Solving&#10;Team Collaboration"
+          rows="4"
+          className="skills-textarea"
+        />
+        <small>Press Enter after each skill or use commas to separate</small>
+      </div>
+
+      <div className="form-group">
+        <label>Languages</label>
+        <textarea
+          value={getSkillsDisplayValue(skills.languages)}
+          onChange={(e) => updateSkillCategory('languages', e.target.value)}
+          placeholder="English (Native)&#10;Spanish (Fluent)&#10;French (Intermediate)"
+          rows="3"
+          className="skills-textarea"
+        />
+        <small>Press Enter after each language or use commas to separate</small>
+      </div>
+    </div>
+  );
+};
 
   const renderProjects = () => {
     const projects = data.projects || [];

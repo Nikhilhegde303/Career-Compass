@@ -30,6 +30,21 @@ class ResumeService {
     const response = await api.post(`/resumes/${id}/duplicate`);
     return response.data;
   }
+
+  // Add this method to the existing ResumeService class
+async uploadResume(file) {
+  const formData = new FormData();
+  formData.append('resume', file);
+
+  const response = await api.post('/resumes/upload', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    },
+    transformRequest: [(data) => data] // Don't transform FormData
+  });
+
+  return response.data;
+}
   
 }
 

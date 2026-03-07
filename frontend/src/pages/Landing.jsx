@@ -10,7 +10,7 @@ const FEATURES = [
     icon: '📝',
     title: 'Resume Builder',
     description: 'Create and manage professional resumes with multiple templates and live preview',
-    route: '/resume-builder',
+    route: '/resume',  // CHANGED from /resume-builder
     ctaText: 'Build Resume',
     status: 'active'
   },

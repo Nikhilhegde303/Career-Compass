@@ -72,7 +72,6 @@ class ResumeService {
         template_id: true,
         created_at: true,
         updated_at: true
-        // Exclude full content for list view (performance)
       }
     });
 
@@ -91,7 +90,6 @@ class ResumeService {
       throw new AppError('Resume not found', 404);
     }
 
-    // Ensure user owns this resume
     if (resume.user_id !== userId) {
       throw new AppError('Unauthorized access to this resume', 403);
     }
@@ -103,7 +101,6 @@ class ResumeService {
    * Update an existing resume
    */
   async updateResume(resumeId, userId, data) {
-    // First verify ownership
     await this.getResumeById(resumeId, userId);
 
     const { title, templateId, content } = data;
@@ -125,7 +122,6 @@ class ResumeService {
    * Delete a resume
    */
   async deleteResume(resumeId, userId) {
-    // First verify ownership
     await this.getResumeById(resumeId, userId);
 
     await prisma.resume.delete({

@@ -1,6 +1,7 @@
+import { forwardRef } from 'react';
 import './ResumePreview.css';
 
-function ResumePreview({ data, templateId }) {
+const ResumePreview = forwardRef(({ data, templateId }, ref) => {
   const formatDate = (dateStr) => {
     if (!dateStr) return '';
     const [year, month] = dateStr.split('-');
@@ -8,49 +9,66 @@ function ResumePreview({ data, templateId }) {
     return `${monthNames[parseInt(month) - 1]} ${year}`;
   };
 
+  // Helper to check if section has content
+  const hasPersonalInfo = data.personal?.fullName || data.personal?.email;
+  const hasExperience = data.experience?.length > 0;
+  const hasEducation = data.education?.length > 0;
+  const hasSkills = data.skills?.technical?.length > 0 || data.skills?.soft?.length > 0 || data.skills?.languages?.length > 0;
+  const hasProjects = data.projects?.length > 0;
+
   const renderModernTemplate = () => (
     <div className="resume-template modern">
       {/* Header */}
-      <div className="resume-header">
+      {hasPersonalInfo && (
+      <div className="resume-header modern-header">
         <h1>{data.personal?.fullName || 'Your Name'}</h1>
         <div className="contact-info">
           {data.personal?.email && <span>{data.personal.email}</span>}
           {data.personal?.phone && <span>{data.personal.phone}</span>}
           {data.personal?.location && <span>{data.personal.location}</span>}
         </div>
-        <div className="links">
-          {data.personal?.linkedin && <a href={data.personal.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>}
-          {data.personal?.portfolio && <a href={data.personal.portfolio} target="_blank" rel="noopener noreferrer">Portfolio</a>}
-        </div>
+        {(data.personal?.linkedin || data.personal?.portfolio) && (
+          <div className="links">
+            {data.personal?.linkedin && (
+              <span className="link-text">{data.personal.linkedin}</span>
+            )}
+            {data.personal?.portfolio && (
+              <span className="link-text">{data.personal.portfolio}</span>
+            )}
+          </div>
+        )}
       </div>
+    )}
 
       {/* Summary */}
       {data.personal?.summary && (
         <div className="resume-section">
           <h2>Professional Summary</h2>
-          <p>{data.personal.summary}</p>
+          <p className="summary-text">{data.personal.summary}</p>
         </div>
       )}
 
       {/* Experience */}
-      {data.experience?.length > 0 && (
+      {hasExperience && (
         <div className="resume-section">
           <h2>Experience</h2>
           {data.experience.map((exp) => (
             <div key={exp.id} className="entry">
               <div className="entry-header">
-                <div>
+                <div className="entry-left">
                   <h3>{exp.position}</h3>
                   <div className="company">{exp.company}</div>
                 </div>
-                <div className="date-location">
-                  <div>{formatDate(exp.startDate)} - {exp.current ? 'Present' : formatDate(exp.endDate)}</div>
-                  {exp.location && <div>{exp.location}</div>}
+                <div className="entry-right">
+                  <div className="date-text">
+                    {formatDate(exp.startDate)} - {exp.current ? 'Present' : formatDate(exp.endDate)}
+                  </div>
+                  {exp.location && <div className="location-text">{exp.location}</div>}
                 </div>
               </div>
               {exp.achievements?.length > 0 && (
-                <ul>
-                  {exp.achievements.map((achievement, idx) => (
+                <ul className="achievements-list">
+                  {exp.achievements.filter(a => a.trim()).map((achievement, idx) => (
                     <li key={idx}>{achievement}</li>
                   ))}
                 </ul>
@@ -61,25 +79,27 @@ function ResumePreview({ data, templateId }) {
       )}
 
       {/* Education */}
-      {data.education?.length > 0 && (
+      {hasEducation && (
         <div className="resume-section">
           <h2>Education</h2>
           {data.education.map((edu) => (
             <div key={edu.id} className="entry">
               <div className="entry-header">
-                <div>
-                  <h3>{edu.degree} {edu.field && `in ${edu.field}`}</h3>
+                <div className="entry-left">
+                  <h3>{edu.degree}{edu.field && ` in ${edu.field}`}</h3>
                   <div className="company">{edu.institution}</div>
                 </div>
-                <div className="date-location">
-                  <div>{formatDate(edu.startDate)} - {formatDate(edu.endDate)}</div>
-                  {edu.location && <div>{edu.location}</div>}
+                <div className="entry-right">
+                  <div className="date-text">
+                    {formatDate(edu.startDate)} - {formatDate(edu.endDate)}
+                  </div>
+                  {edu.location && <div className="location-text">{edu.location}</div>}
                 </div>
               </div>
-              {edu.gpa && <div className="gpa">GPA: {edu.gpa}</div>}
+              {edu.gpa && <div className="gpa-text">GPA: {edu.gpa}</div>}
               {edu.achievements?.length > 0 && (
-                <ul>
-                  {edu.achievements.map((achievement, idx) => (
+                <ul className="achievements-list">
+                  {edu.achievements.filter(a => a.trim()).map((achievement, idx) => (
                     <li key={idx}>{achievement}</li>
                   ))}
                 </ul>
@@ -90,21 +110,29 @@ function ResumePreview({ data, templateId }) {
       )}
 
       {/* Projects */}
-      {data.projects?.length > 0 && (
+      {hasProjects && (
         <div className="resume-section">
           <h2>Projects</h2>
           {data.projects.map((project) => (
             <div key={project.id} className="entry">
               <div className="entry-header">
-                <div>
+                <div className="entry-left">
                   <h3>{project.name}</h3>
-                  {project.link && <a href={project.link} target="_blank" rel="noopener noreferrer">{project.link}</a>}
+                  {project.link && (
+                    <a href={project.link} className="project-link" target="_blank" rel="noopener noreferrer">
+                      {project.link}
+                    </a>
+                  )}
                 </div>
-                <div className="date-location">
-                  <div>{formatDate(project.startDate)} - {formatDate(project.endDate)}</div>
-                </div>
+                {(project.startDate || project.endDate) && (
+                  <div className="entry-right">
+                    <div className="date-text">
+                      {formatDate(project.startDate)} {project.endDate && `- ${formatDate(project.endDate)}`}
+                    </div>
+                  </div>
+                )}
               </div>
-              {project.description && <p>{project.description}</p>}
+              {project.description && <p className="project-description">{project.description}</p>}
               {project.technologies?.length > 0 && (
                 <div className="technologies">
                   <strong>Technologies:</strong> {project.technologies.join(', ')}
@@ -116,24 +144,33 @@ function ResumePreview({ data, templateId }) {
       )}
 
       {/* Skills */}
-      {(data.skills?.technical?.length > 0 || data.skills?.soft?.length > 0 || data.skills?.languages?.length > 0) && (
+      {hasSkills && (
         <div className="resume-section">
           <h2>Skills</h2>
-          {data.skills.technical?.length > 0 && (
-            <div className="skill-category">
-              <strong>Technical:</strong> {data.skills.technical.join(', ')}
-            </div>
-          )}
-          {data.skills.soft?.length > 0 && (
-            <div className="skill-category">
-              <strong>Soft Skills:</strong> {data.skills.soft.join(', ')}
-            </div>
-          )}
-          {data.skills.languages?.length > 0 && (
-            <div className="skill-category">
-              <strong>Languages:</strong> {data.skills.languages.join(', ')}
-            </div>
-          )}
+          <div className="skills-grid">
+            {data.skills.technical?.length > 0 && (
+              <div className="skill-category">
+                <strong>Technical:</strong> {data.skills.technical.join(', ')}
+              </div>
+            )}
+            {data.skills.soft?.length > 0 && (
+              <div className="skill-category">
+                <strong>Soft Skills:</strong> {data.skills.soft.join(', ')}
+              </div>
+            )}
+            {data.skills.languages?.length > 0 && (
+              <div className="skill-category">
+                <strong>Languages:</strong> {data.skills.languages.join(', ')}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Empty state */}
+      {!hasPersonalInfo && !hasExperience && !hasEducation && !hasSkills && !hasProjects && (
+        <div className="empty-preview">
+          <p>Start filling in your information to see your resume preview</p>
         </div>
       )}
     </div>
@@ -142,14 +179,16 @@ function ResumePreview({ data, templateId }) {
   const renderClassicTemplate = () => (
     <div className="resume-template classic">
       {/* Header */}
-      <div className="resume-header classic-header">
-        <h1>{data.personal?.fullName || 'Your Name'}</h1>
-        <div className="contact-bar">
-          {data.personal?.email && <span>✉ {data.personal.email}</span>}
-          {data.personal?.phone && <span>☎ {data.personal.phone}</span>}
-          {data.personal?.location && <span>📍 {data.personal.location}</span>}
+      {hasPersonalInfo && (
+        <div className="resume-header classic-header">
+          <h1>{data.personal?.fullName || 'Your Name'}</h1>
+          <div className="contact-bar">
+            {data.personal?.email && <span>✉ {data.personal.email}</span>}
+            {data.personal?.phone && <span>☎ {data.personal.phone}</span>}
+            {data.personal?.location && <span>📍 {data.personal.location}</span>}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Summary */}
       {data.personal?.summary && (
@@ -160,7 +199,7 @@ function ResumePreview({ data, templateId }) {
       )}
 
       {/* Experience */}
-      {data.experience?.length > 0 && (
+      {hasExperience && (
         <div className="resume-section">
           <div className="section-title">PROFESSIONAL EXPERIENCE</div>
           {data.experience.map((exp) => (
@@ -176,7 +215,7 @@ function ResumePreview({ data, templateId }) {
               </div>
               {exp.achievements?.length > 0 && (
                 <ul className="classic-list">
-                  {exp.achievements.map((achievement, idx) => (
+                  {exp.achievements.filter(a => a.trim()).map((achievement, idx) => (
                     <li key={idx}>{achievement}</li>
                   ))}
                 </ul>
@@ -187,13 +226,13 @@ function ResumePreview({ data, templateId }) {
       )}
 
       {/* Education */}
-      {data.education?.length > 0 && (
+      {hasEducation && (
         <div className="resume-section">
           <div className="section-title">EDUCATION</div>
           {data.education.map((edu) => (
             <div key={edu.id} className="classic-entry">
               <div className="classic-entry-header">
-                <strong>{edu.degree} {edu.field && `in ${edu.field}`}</strong>
+                <strong>{edu.degree}{edu.field && ` in ${edu.field}`}</strong>
                 <span className="date-range">
                   {formatDate(edu.startDate)} - {formatDate(edu.endDate)}
                 </span>
@@ -204,7 +243,7 @@ function ResumePreview({ data, templateId }) {
               {edu.gpa && <div className="gpa-line">GPA: {edu.gpa}</div>}
               {edu.achievements?.length > 0 && (
                 <ul className="classic-list">
-                  {edu.achievements.map((achievement, idx) => (
+                  {edu.achievements.filter(a => a.trim()).map((achievement, idx) => (
                     <li key={idx}>{achievement}</li>
                   ))}
                 </ul>
@@ -214,34 +253,19 @@ function ResumePreview({ data, templateId }) {
         </div>
       )}
 
-      {/* Skills */}
-      {(data.skills?.technical?.length > 0 || data.skills?.soft?.length > 0) && (
-        <div className="resume-section">
-          <div className="section-title">SKILLS</div>
-          {data.skills.technical?.length > 0 && (
-            <div className="classic-skills">
-              <strong>Technical:</strong> {data.skills.technical.join(' • ')}
-            </div>
-          )}
-          {data.skills.soft?.length > 0 && (
-            <div className="classic-skills">
-              <strong>Soft Skills:</strong> {data.skills.soft.join(' • ')}
-            </div>
-          )}
-        </div>
-      )}
-
       {/* Projects */}
-      {data.projects?.length > 0 && (
+      {hasProjects && (
         <div className="resume-section">
           <div className="section-title">PROJECTS</div>
           {data.projects.map((project) => (
             <div key={project.id} className="classic-entry">
               <div className="classic-entry-header">
                 <strong>{project.name}</strong>
-                <span className="date-range">
-                  {formatDate(project.startDate)} - {formatDate(project.endDate)}
-                </span>
+                {(project.startDate || project.endDate) && (
+                  <span className="date-range">
+                    {formatDate(project.startDate)} {project.endDate && `- ${formatDate(project.endDate)}`}
+                  </span>
+                )}
               </div>
               {project.description && <p className="project-desc">{project.description}</p>}
               {project.technologies?.length > 0 && (
@@ -255,6 +279,35 @@ function ResumePreview({ data, templateId }) {
           ))}
         </div>
       )}
+
+      {/* Skills */}
+      {hasSkills && (
+        <div className="resume-section">
+          <div className="section-title">SKILLS</div>
+          {data.skills.technical?.length > 0 && (
+            <div className="classic-skills">
+              <strong>Technical:</strong> {data.skills.technical.join(' • ')}
+            </div>
+          )}
+          {data.skills.soft?.length > 0 && (
+            <div className="classic-skills">
+              <strong>Soft Skills:</strong> {data.skills.soft.join(' • ')}
+            </div>
+          )}
+          {data.skills.languages?.length > 0 && (
+            <div className="classic-skills">
+              <strong>Languages:</strong> {data.skills.languages.join(' • ')}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Empty state */}
+      {!hasPersonalInfo && !hasExperience && !hasEducation && !hasSkills && !hasProjects && (
+        <div className="empty-preview">
+          <p>Start filling in your information to see your resume preview</p>
+        </div>
+      )}
     </div>
   );
 
@@ -264,10 +317,14 @@ function ResumePreview({ data, templateId }) {
         <h3>Preview</h3>
       </div>
       <div className="preview-content">
-        {templateId === 'classic' ? renderClassicTemplate() : renderModernTemplate()}
+        <div ref={ref}>
+          {templateId === 'classic' ? renderClassicTemplate() : renderModernTemplate()}
+        </div>
       </div>
     </div>
   );
-}
+});
+
+ResumePreview.displayName = 'ResumePreview';
 
 export default ResumePreview;

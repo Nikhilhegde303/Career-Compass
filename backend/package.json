@@ -15,11 +15,16 @@
   "dependencies": {
     "@prisma/client": "^6.19.2",
     "bcrypt": "^6.0.0",
+    "canvas": "^3.2.1",
     "cors": "^2.8.6",
+    "docx": "^9.6.0",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
     "joi": "^18.0.2",
     "jsonwebtoken": "^9.0.3",
+    "mammoth": "^1.11.0",
+    "multer": "^2.0.2",
+    "pdfjs-dist": "^5.4.624",
     "prisma": "^6.19.2"
   },
   "devDependencies": {

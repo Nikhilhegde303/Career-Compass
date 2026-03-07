@@ -1,4 +1,4 @@
-import resumeService from '../services/resumeServices.js';
+import resumeService from '../services/resumeService.js';
 import AppError from '../utils/appError.js';
 
 class ResumeController {
@@ -8,7 +8,15 @@ class ResumeController {
    */
   async createResume(req, res, next) {
     try {
-      const userId = req.user.id; // From authMiddleware
+      const userId = req.user.user_id || req.user.id; // FIX: Support both field names
+      
+      console.log('Creating resume for user:', userId); // DEBUG
+      console.log('Request body:', req.body); // DEBUG
+      
+      if (!userId) {
+        throw new AppError('User ID not found in request', 401);
+      }
+      
       const resume = await resumeService.createResume(userId, req.body);
 
       res.status(201).json({
@@ -26,7 +34,7 @@ class ResumeController {
    */
   async getResumes(req, res, next) {
     try {
-      const userId = req.user.id;
+      const userId = req.user.user_id || req.user.id; // FIX
       const resumes = await resumeService.getUserResumes(userId);
 
       res.status(200).json({
@@ -44,7 +52,7 @@ class ResumeController {
    */
   async getResume(req, res, next) {
     try {
-      const userId = req.user.id;
+      const userId = req.user.user_id || req.user.id; // FIX
       const { id } = req.params;
 
       const resume = await resumeService.getResumeById(id, userId);
@@ -64,7 +72,7 @@ class ResumeController {
    */
   async updateResume(req, res, next) {
     try {
-      const userId = req.user.id;
+      const userId = req.user.user_id || req.user.id; // FIX
       const { id } = req.params;
 
       const resume = await resumeService.updateResume(id, userId, req.body);
@@ -84,7 +92,7 @@ class ResumeController {
    */
   async deleteResume(req, res, next) {
     try {
-      const userId = req.user.id;
+      const userId = req.user.user_id || req.user.id; // FIX
       const { id } = req.params;
 
       const result = await resumeService.deleteResume(id, userId);
@@ -104,7 +112,7 @@ class ResumeController {
    */
   async duplicateResume(req, res, next) {
     try {
-      const userId = req.user.id;
+      const userId = req.user.user_id || req.user.id; // FIX
       const { id } = req.params;
 
       const resume = await resumeService.duplicateResume(id, userId);

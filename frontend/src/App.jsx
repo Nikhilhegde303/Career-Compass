@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Landing from './pages/Landing';
+import ResumeEntry from './pages/ResumeEntry';
 import ResumeBuilder from './pages/ResumeBuilder';
 import ProtectedRoute from './components/ProtectedRoute';
 import { authUtils } from './utils/auth';
@@ -19,54 +20,62 @@ function App() {
         {/* Protected routes */}
         <Route element={<ProtectedRoute />}>
           <Route path="/dashboard" element={<Landing />} />
+          <Route
+          path="/resume"
+          element={
+              <ResumeEntry />       
+          }
+        />
           <Route path="/resume-builder" element={<ResumeBuilder />} />
         </Route>
 
+        
+
         {/* Coming Soon - Placeholder Routes */}
-        <Route 
-          path="/resume-optimizer" 
+        <Route
+          path="/resume-optimizer"
           element={
             <ProtectedRoute>
               <ComingSoonPage title="Resume Optimizer" />
             </ProtectedRoute>
-          } 
+          }
         />
-        
-        <Route 
-          path="/ats-analyzer" 
+
+        <Route
+          path="/ats-analyzer"
           element={
             <ProtectedRoute>
               <ComingSoonPage title="ATS Analyzer" />
             </ProtectedRoute>
-          } 
+          }
         />
-        
-        <Route 
-          path="/job-matching" 
+
+        <Route
+          path="/job-matching"
           element={
             <ProtectedRoute>
               <ComingSoonPage title="Role & Job Matching" />
             </ProtectedRoute>
-          } 
+          }
         />
-        
-        <Route 
-          path="/insights" 
+
+        <Route
+          path="/insights"
           element={
             <ProtectedRoute>
               <ComingSoonPage title="Suggestions & Insights" />
             </ProtectedRoute>
-          } 
+          }
         />
 
         {/* Redirect root to dashboard if authenticated, else to login */}
-        <Route 
-          path="/" 
+        <Route
+          path="/"
           element={
-            authUtils.isAuthenticated() 
-              ? <Navigate to="/dashboard" replace /> 
+            authUtils.isAuthenticated()
+              ? <Navigate to="/dashboard" replace />
               : <Navigate to="/login" replace />
-          } 
+          }
         />
 
         {/* 404 route */}
@@ -97,24 +106,24 @@ const ComingSoonPage = ({ title }) => {
         maxWidth: '500px'
       }}>
         <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>🚧</div>
-        <h2 style={{ 
-          fontSize: '2rem', 
-          fontWeight: '700', 
+        <h2 style={{
+          fontSize: '2rem',
+          fontWeight: '700',
           color: '#1a1a1a',
           marginBottom: '1rem'
         }}>
           {title}
         </h2>
-        <p style={{ 
-          fontSize: '1.1rem', 
-          color: '#666', 
+        <p style={{
+          fontSize: '1.1rem',
+          color: '#666',
           marginBottom: '2rem',
           lineHeight: '1.6'
         }}>
           We're building this feature for you! Check back soon for updates.
         </p>
-        <a 
-          href="/dashboard" 
+        <a
+          href="/dashboard"
           style={{
             display: 'inline-block',
             background: '#2196f3',

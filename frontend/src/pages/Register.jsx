@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { authService } from '../services/authService';
 import { authUtils } from '../utils/auth';
 import Input from '../components/Input';
-import './Auth.css'; // We'll create this next
+import './Auth.css'; 
 
 const Register = () => {
   const navigate = useNavigate();
@@ -101,7 +101,7 @@ const Register = () => {
     <div className="auth-container">
       <div className="auth-card">
         <h2 className="auth-title">Create an Account</h2>
-        <p className="auth-subtitle">Start your career journey with Career Compass</p>
+        <h4 className="auth-subtitle">Start your career journey with Career Compass</h4>
 
         {apiError && (
           <div className="auth-error">
@@ -141,7 +141,7 @@ const Register = () => {
             value={formData.password}
             onChange={handleChange}
             error={errors.password}
-            placeholder="Create a password (min. 6 characters)"
+            placeholder="Create a password (minimum 6 characters)"
             required
             disabled={isLoading}
           />
