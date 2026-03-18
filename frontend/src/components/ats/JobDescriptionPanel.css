@@ -1,0 +1,134 @@
+/* frontend/src/components/ats/JobDescriptionPanel.css */
+
+.jd-panel {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.jd-panel__header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.jd-panel__title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0 0 0.5rem 0;
+}
+
+.jd-panel__subtitle {
+  color: #666;
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* ── Form ─────────────────────────────────────────────────────────── */
+.jd-panel__form {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.jd-panel__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.jd-panel__group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.jd-panel__label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #555;
+}
+
+.jd-panel__required {
+  color: #f44336;
+  margin-left: 2px;
+}
+
+.jd-panel__optional {
+  font-weight: 400;
+  color: #999;
+  font-size: 0.82rem;
+}
+
+.jd-panel__hint {
+  font-size: 0.85rem;
+  color: #1976d2;
+  background: #e3f2fd;
+  border-left: 3px solid #2196f3;
+  border-radius: 4px;
+  padding: 0.65rem 0.9rem;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.5;
+}
+
+.jd-panel__input {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  transition: border-color 0.2s;
+  color: #333;
+}
+
+.jd-panel__input:focus {
+  outline: none;
+  border-color: #2196f3;
+}
+
+.jd-panel__textarea {
+  padding: 0.85rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.92rem;
+  font-family: inherit;
+  line-height: 1.6;
+  resize: vertical;
+  transition: border-color 0.2s;
+  color: #333;
+}
+
+.jd-panel__textarea:focus {
+  outline: none;
+  border-color: #2196f3;
+}
+
+.jd-panel__textarea--error {
+  border-color: #f44336;
+}
+
+.jd-panel__error-msg {
+  font-size: 0.83rem;
+  color: #f44336;
+  margin-top: 2px;
+}
+
+.jd-panel__char-count {
+  font-size: 0.8rem;
+  color: #999;
+  text-align: right;
+}
+
+.jd-panel__char-warn {
+  color: #ff9800;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .jd-panel__row {
+    grid-template-columns: 1fr;
+  }
+}

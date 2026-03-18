@@ -5,6 +5,7 @@ import Register from './pages/Register';
 import Landing from './pages/Landing';
 import ResumeEntry from './pages/ResumeEntry';
 import ResumeBuilder from './pages/ResumeBuilder';
+import ATSAnalyzer from './pages/ATSAnalyzer';
 import ProtectedRoute from './components/ProtectedRoute';
 import { authUtils } from './utils/auth';
 import './App.css';
@@ -19,17 +20,15 @@ function App() {
 
         {/* Protected routes */}
         <Route element={<ProtectedRoute />}>
-          <Route path="/dashboard" element={<Landing />} />
-          <Route
-          path="/resume"
-          element={
-              <ResumeEntry />       
-          }
-        />
-          <Route path="/resume-builder" element={<ResumeBuilder />} />
-        </Route>
+  <Route path="/dashboard" element={<Landing />} />
+  <Route path="/resume" element={<ResumeEntry />} />
+  <Route path="/resume-builder" element={<ResumeBuilder />} />
 
-        
+  {/* ADD THESE TWO LINES HERE */}
+  <Route path="/ats-analyzer" element={<ATSAnalyzer />} />
+  <Route path="/resume/:id/analyze" element={<ATSAnalyzer />} />
+</Route>
+
 
         {/* Coming Soon - Placeholder Routes */}
         <Route
@@ -41,14 +40,7 @@ function App() {
           }
         />
 
-        <Route
-          path="/ats-analyzer"
-          element={
-            <ProtectedRoute>
-              <ComingSoonPage title="ATS Analyzer" />
-            </ProtectedRoute>
-          }
-        />
+
 
         <Route
           path="/job-matching"

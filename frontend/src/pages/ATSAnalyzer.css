@@ -1,0 +1,506 @@
+/* frontend/src/pages/ATSAnalyzer.css */
+
+/* ── Page shell ──────────────────────────────────────────────────── */
+.ats-page {
+  min-height: 100vh;
+  background: #f5f7fa;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Header ──────────────────────────────────────────────────────── */
+.ats-page__header {
+  background: #fff;
+  border-bottom: 1px solid #e0e0e0;
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+.ats-page__header-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.ats-page__header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.ats-page__back-btn {
+  background: transparent;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.85rem;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.ats-page__back-btn:hover {
+  background: #f5f7fa;
+  border-color: #ccc;
+  color: #333;
+}
+
+.ats-page__title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0;
+}
+
+.ats-page__resume-label {
+  display: block;
+  font-size: 0.78rem;
+  color: #999;
+  margin-top: 1px;
+}
+
+/* ── Stepper breadcrumb ──────────────────────────────────────────── */
+.ats-page__stepper {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.ats-page__step-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.ats-page__step-connector {
+  width: 32px;
+  height: 2px;
+  background: #e0e0e0;
+  transition: background 0.3s;
+}
+
+.ats-page__step-connector--done {
+  background: #2196f3;
+}
+
+.ats-page__step {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.ats-page__step-dot {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2px solid #e0e0e0;
+  background: #fff;
+  color: #bbb;
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  flex-shrink: 0;
+}
+
+.ats-page__step--done .ats-page__step-dot {
+  background: #2196f3;
+  border-color: #2196f3;
+  color: #fff;
+}
+
+.ats-page__step--active .ats-page__step-dot {
+  border-color: #2196f3;
+  color: #2196f3;
+  background: #e3f2fd;
+}
+
+.ats-page__step-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #bbb;
+  white-space: nowrap;
+}
+
+.ats-page__step--active .ats-page__step-label {
+  color: #2196f3;
+}
+
+.ats-page__step--done .ats-page__step-label {
+  color: #888;
+}
+
+/* ── Main content area ───────────────────────────────────────────── */
+.ats-page__content {
+  flex: 1;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2.5rem 2rem;
+  position: relative;
+}
+
+/* ── Global error ─────────────────────────────────────────────────── */
+.ats-page__error {
+  background: #ffebee;
+  border: 1px solid #ffcdd2;
+  border-radius: 10px;
+  padding: 0.9rem 1.25rem;
+  color: #c62828;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ── Loading overlay ─────────────────────────────────────────────── */
+.ats-page__loading {
+  position: fixed;
+  inset: 0;
+  background: rgba(245, 247, 250, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  backdrop-filter: blur(4px);
+}
+
+.ats-page__loading-card {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 16px;
+  padding: 3rem 3.5rem;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+
+.ats-page__loading-card h3 {
+  font-size: 1.1rem;
+  color: #333;
+  margin: 1rem 0 0.4rem;
+}
+
+.ats-page__loading-card p {
+  font-size: 0.88rem;
+  color: #999;
+  margin: 0;
+}
+
+.ats-page__spinner {
+  width: 44px;
+  height: 44px;
+  border: 3px solid #e3f2fd;
+  border-top-color: #2196f3;
+  border-radius: 50%;
+  animation: ats-spin 0.8s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes ats-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Step content wrapper (mode / JD steps) ──────────────────────── */
+.ats-page__step-wrapper-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.ats-page__step-actions {
+  display: flex;
+  justify-content: center;
+}
+
+.ats-page__next-btn {
+  background: #2196f3;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 0.85rem 2.5rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  box-shadow: 0 2px 8px rgba(33, 150, 243, 0.3);
+}
+
+.ats-page__next-btn:hover {
+  background: #1976d2;
+  transform: translateY(-1px);
+}
+
+.ats-page__next-btn--disabled {
+  background: #bdbdbd;
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ── Results layout ──────────────────────────────────────────────── */
+.ats-results__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.ats-results__reanalyze-btn {
+  background: transparent;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 0.5rem 1.1rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #555;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.ats-results__reanalyze-btn:hover {
+  background: #f5f7fa;
+  border-color: #2196f3;
+  color: #2196f3;
+}
+
+.ats-results__history-note {
+  font-size: 0.82rem;
+  color: #aaa;
+}
+
+.ats-results__layout {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.ats-results__sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* ── Tabs ─────────────────────────────────────────────────────────── */
+.ats-results__tabs {
+  display: flex;
+  border-bottom: 2px solid #e8ecf0;
+  margin-bottom: 1.5rem;
+  overflow-x: auto;
+}
+
+.ats-results__tab {
+  padding: 0.75rem 1.25rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #999;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  white-space: nowrap;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.ats-results__tab:hover {
+  color: #555;
+}
+
+.ats-results__tab--active {
+  color: #2196f3;
+  border-bottom-color: #2196f3;
+}
+
+/* ── Overview tab ─────────────────────────────────────────────────── */
+.ats-results__overview {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.ats-results__overview-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0 0 0.4rem;
+}
+
+.ats-results__overview-desc {
+  font-size: 0.9rem;
+  color: #777;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.ats-overview__cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+.ats-overview__card {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 1rem 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: box-shadow 0.2s;
+}
+
+.ats-overview__card:hover {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+
+.ats-overview__card-icon {
+  font-size: 1.5rem;
+}
+
+.ats-overview__card-info {
+  flex: 1;
+}
+
+.ats-overview__card-label {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #444;
+}
+
+.ats-overview__card-tip {
+  font-size: 0.77rem;
+  color: #aaa;
+  margin-top: 1px;
+}
+
+.ats-overview__card-score {
+  font-size: 1.4rem;
+  font-weight: 800;
+}
+
+.ats-overview__top-suggestions {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 1.4rem 1.5rem;
+}
+
+.ats-overview__top-suggestions-title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0 0 1rem 0;
+}
+
+.ats-overview__top-suggestions-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.ats-overview__top-suggestion-item {
+  display: flex;
+  gap: 0.65rem;
+  font-size: 0.87rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+.ats-overview__bullet {
+  color: #2196f3;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.ats-overview__see-all-btn {
+  background: transparent;
+  border: none;
+  color: #2196f3;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  transition: opacity 0.2s;
+}
+
+.ats-overview__see-all-btn:hover {
+  opacity: 0.75;
+}
+
+.ats-results__actions-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.ats-results__improve-btn {
+  background: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.55rem 1.25rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.ats-results__improve-btn:hover {
+  background: #388e3c;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .ats-results__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .ats-results__sidebar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .ats-page__header-inner {
+    padding: 0 1rem;
+    height: auto;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .ats-page__stepper {
+    overflow-x: auto;
+    width: 100%;
+  }
+
+  .ats-page__content {
+    padding: 1.5rem 1rem;
+  }
+
+  .ats-overview__cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .ats-page__step-label {
+    display: none;
+  }
+}

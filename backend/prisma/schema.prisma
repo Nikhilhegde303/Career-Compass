@@ -23,6 +23,8 @@ model User {
   last_login_at      DateTime?
   resumes            Resume[]  // ADD THIS LINE
 
+  analyses  Analysis[]
+
   @@index([email])
   @@index([role])
   @@index([created_at])
@@ -38,6 +40,8 @@ model Resume {
   content    Json
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+
+  analyses  Analysis[]
   
   user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
   
@@ -49,4 +53,46 @@ enum UserRole {
   USER
   ADMIN
   CAREER_COUNSELOR
+}
+
+
+// ─── ADD THIS MODEL ───────────────────────────────────────────────────────────
+
+model Analysis {
+  id                String   @id @default(uuid())
+  resume_id         String
+  user_id           String
+
+  analysis_type     String   // "health" | "job_match"
+  job_description   String?
+  job_title         String?
+  company           String?
+
+  overall_score     Int?
+  match_score       Int?
+
+  structure_score   Int?
+  keyword_score     Int?
+  impact_score      Int?
+  skills_score      Int?
+  readability_score Int?
+
+  strengths         Json
+  weaknesses        Json
+  suggestions       Json
+
+  matched_keywords  Json?
+  missing_keywords  Json?
+
+  // ML-ready feature vector — stored for future model training
+  feature_vector    Json?
+
+  created_at        DateTime @default(now())
+
+  resume Resume @relation(fields: [resume_id], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [user_id],   references: [id], onDelete: Cascade)
+
+  @@index([resume_id])
+  @@index([user_id])
+  @@map("analysis_results")
 }

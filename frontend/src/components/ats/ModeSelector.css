@@ -1,0 +1,124 @@
+/* frontend/src/components/ats/ModeSelector.css */
+
+.mode-selector {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.mode-selector__header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.mode-selector__title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0 0 0.5rem 0;
+}
+
+.mode-selector__subtitle {
+  color: #666;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.mode-selector__cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+/* ── Mode Card ─────────────────────────────────────────────────── */
+.mode-card {
+  background: #fff;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 2rem;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+  display: flex;
+  flex-direction: column;
+}
+
+.mode-card:hover {
+  border-color: #90caf9;
+  box-shadow: 0 4px 16px rgba(33, 150, 243, 0.12);
+  transform: translateY(-2px);
+}
+
+.mode-card--selected {
+  border-color: #2196f3;
+  box-shadow: 0 4px 20px rgba(33, 150, 243, 0.18);
+}
+
+.mode-card__icon {
+  font-size: 2.4rem;
+  margin-bottom: 1rem;
+}
+
+.mode-card__title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0 0 0.75rem 0;
+}
+
+.mode-card__desc {
+  color: #666;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0 0 1.25rem 0;
+  flex: 1;
+}
+
+.mode-card__checks {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem 0;
+  border-top: 1px solid #f0f0f0;
+  padding-top: 1rem;
+}
+
+.mode-card__check-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.88rem;
+  color: #555;
+  padding: 0.3rem 0;
+}
+
+.mode-card__check-icon {
+  color: #4caf50;
+  font-weight: 700;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+}
+
+.mode-card__cta {
+  text-align: center;
+  background: #f5f7fa;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 0.7rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #666;
+  transition: all 0.2s;
+  margin-top: auto;
+}
+
+.mode-card--selected .mode-card__cta,
+.mode-card__cta--active {
+  background: #2196f3;
+  border-color: #2196f3;
+  color: #fff;
+}
+
+/* ── Responsive ─────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .mode-selector__cards {
+    grid-template-columns: 1fr;
+  }
+}

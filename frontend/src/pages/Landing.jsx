@@ -15,19 +15,19 @@ const FEATURES = [
     status: 'active'
   },
   {
-    icon: '✨',
-    title: 'Resume Optimizer',
-    description: 'Tailor your resume for specific jobs with AI-powered suggestions',
-    route: '/resume-optimizer',
-    ctaText: 'Optimize Resume',
-    status: 'coming-soon'
-  },
-  {
     icon: '🎯',
     title: 'ATS Analyzer',
     description: 'Check how Applicant Tracking Systems parse and score your resume',
     route: '/ats-analyzer',
     ctaText: 'Analyze ATS',
+    status: 'active'
+  },
+  {
+    icon: '✨',
+    title: 'Resume Optimizer',
+    description: 'Tailor your resume for specific jobs with AI-powered suggestions',
+    route: '/resume-optimizer',
+    ctaText: 'Optimize Resume',
     status: 'coming-soon'
   },
   {

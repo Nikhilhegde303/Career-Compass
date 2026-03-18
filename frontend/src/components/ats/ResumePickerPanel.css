@@ -1,0 +1,249 @@
+/* frontend/src/components/ats/ResumePickerPanel.css */
+
+.resume-picker {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.resume-picker__header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.resume-picker__title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0 0 0.5rem 0;
+}
+
+.resume-picker__subtitle {
+  color: #666;
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* ── Section ─────────────────────────────────────────────────────── */
+.resume-picker__section {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 1.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.resume-picker__section-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0 0 1.25rem 0;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.resume-picker__upload-desc {
+  color: #666;
+  font-size: 0.9rem;
+  margin: -0.75rem 0 1.25rem 0;
+}
+
+/* ── States ──────────────────────────────────────────────────────── */
+.resume-picker__error {
+  background: #ffebee;
+  border: 1px solid #ffcdd2;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  color: #c62828;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.resume-picker__loading,
+.resume-picker__upload-loading {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.5rem 0;
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.resume-picker__spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #e0e0e0;
+  border-top-color: #2196f3;
+  border-radius: 50%;
+  animation: ats-spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes ats-spin {
+  to { transform: rotate(360deg); }
+}
+
+.resume-picker__empty {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: #999;
+}
+
+.resume-picker__empty-icon {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.resume-picker__empty p {
+  margin: 0.25rem 0;
+  font-size: 0.9rem;
+}
+
+/* ── Resume Cards Grid ───────────────────────────────────────────── */
+.resume-picker__grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.resume-picker__card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: #f9f9f9;
+  border: 1px solid #e8e8e8;
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.resume-picker__card:hover {
+  border-color: #90caf9;
+  box-shadow: 0 2px 8px rgba(33, 150, 243, 0.1);
+}
+
+.resume-picker__card-body {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.resume-picker__card-icon {
+  font-size: 1.8rem;
+  flex-shrink: 0;
+}
+
+.resume-picker__card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.resume-picker__card-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.resume-picker__card-date {
+  font-size: 0.8rem;
+  color: #999;
+}
+
+.resume-picker__completeness {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.25rem;
+}
+
+.resume-picker__completeness-bar {
+  flex: 1;
+  max-width: 120px;
+  height: 5px;
+  background: #e0e0e0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.resume-picker__completeness-fill {
+  height: 100%;
+  background: #2196f3;
+  border-radius: 3px;
+  transition: width 0.4s ease;
+}
+
+.resume-picker__completeness-label {
+  font-size: 0.78rem;
+  color: #999;
+  white-space: nowrap;
+}
+
+.resume-picker__select-btn {
+  background: #2196f3;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.55rem 1.1rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+
+.resume-picker__select-btn:hover {
+  background: #1976d2;
+}
+
+/* ── Drop Zone ───────────────────────────────────────────────────── */
+.resume-picker__drop-zone {
+  border: 2px dashed #d0d0d0;
+  border-radius: 10px;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.resume-picker__drop-zone:hover {
+  border-color: #90caf9;
+  background: #f0f8ff;
+}
+
+.resume-picker__drop-zone--dragging {
+  border-color: #2196f3;
+  background: #e3f2fd;
+}
+
+.resume-picker__drop-zone--loading {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.resume-picker__drop-icon {
+  font-size: 2.2rem;
+  margin-bottom: 0.75rem;
+}
+
+.resume-picker__drop-primary {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #444;
+  margin: 0 0 0.35rem 0;
+}
+
+.resume-picker__drop-secondary {
+  font-size: 0.83rem;
+  color: #999;
+  margin: 0;
+}

@@ -1,0 +1,159 @@
+/* frontend/src/components/ats/SuggestionsList.css */
+
+.suggestions {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 1.75rem;
+}
+
+.suggestions__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #f0f0f0;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.suggestions__title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0;
+}
+
+.suggestions__summary {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.suggestions__summary-pill {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.65rem;
+  border-radius: 12px;
+}
+
+.suggestions__summary-pill--high {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.suggestions__summary-pill--medium {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+/* ── List ─────────────────────────────────────────────────────────── */
+.suggestions__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ── Item ─────────────────────────────────────────────────────────── */
+.suggestion-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.suggestion-item__number {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  background: #f5f7fa;
+  border: 1px solid #e0e0e0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #666;
+  margin-top: 2px;
+}
+
+.suggestion-item__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.suggestion-item__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.suggestion-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+}
+
+.suggestion-badge--high {
+  background: #ffebee;
+  color: #c62828;
+  border: 1px solid #ffcdd2;
+}
+
+.suggestion-badge--medium {
+  background: #fff3e0;
+  color: #e65100;
+  border: 1px solid #ffe0b2;
+}
+
+.suggestion-badge--low {
+  background: #e3f2fd;
+  color: #1565c0;
+  border: 1px solid #bbdefb;
+}
+
+.suggestion-item__category {
+  font-size: 0.78rem;
+  color: #999;
+  text-transform: capitalize;
+}
+
+.suggestion-item__text {
+  font-size: 0.9rem;
+  color: #444;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── Empty ─────────────────────────────────────────────────────────── */
+.suggestions__empty {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.suggestions__empty-icon {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.suggestions__empty p {
+  color: #999;
+  font-size: 0.9rem;
+  margin: 0;
+}

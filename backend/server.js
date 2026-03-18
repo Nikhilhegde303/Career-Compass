@@ -4,7 +4,9 @@ import dotenv from 'dotenv';
 import authRoutes from './src/routes/authRoutes.js';
 import protectedRoutes from './src/routes/protectedRoutes.js';
 import resumeRoutes from './src/routes/resumeRoutes.js';
+import analysisRoutes from './src/routes/analysisRoutes.js';
 import errorHandler from './src/middleware/errorHandler.js';
+
 
 // Load environment variables
 dotenv.config();
@@ -35,6 +37,8 @@ app.use('/api/protected', protectedRoutes);
 
 // Add to route registration (after authRoutes)
 app.use('/api/resumes', resumeRoutes);
+
+app.use('/api/analysis', analysisRoutes);
 
 // 404 Handler for undefined routes - FIXED VERSION
 app.use((req, res) => {
