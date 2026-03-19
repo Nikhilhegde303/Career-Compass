@@ -30,5 +30,8 @@
   "devDependencies": {
     "@prisma/studio": "^0.511.0",
     "nodemon": "^3.1.11"
-  }
+  },
+  "nodemonConfig": {
+  "watch": ["src"]  
+}
 }

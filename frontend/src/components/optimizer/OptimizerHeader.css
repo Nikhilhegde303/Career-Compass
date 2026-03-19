@@ -1,0 +1,92 @@
+/* frontend/src/components/optimizer/OptimizerHeader.css */
+
+.opt-header {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.opt-header__left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.opt-header__icon {
+  font-size: 2rem;
+}
+
+.opt-header__title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0 0 0.2rem 0;
+}
+
+.opt-header__resume-name {
+  font-size: 0.85rem;
+  color: #999;
+  margin: 0;
+}
+
+.opt-header__scores {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+/* ── Score Pill ───────────────────────────────────────────────────── */
+.score-pill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  min-width: 72px;
+}
+
+.score-pill__number {
+  font-size: 1.4rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.score-pill__label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  margin-top: 2px;
+  white-space: nowrap;
+}
+
+/* ── Mode badge ───────────────────────────────────────────────────── */
+.opt-header__mode-badge {
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.35rem 0.8rem;
+  border-radius: 20px;
+}
+
+.opt-header__mode-badge--health {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.opt-header__mode-badge--match {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.opt-header__no-analysis {
+  font-size: 0.83rem;
+  color: #999;
+  font-style: italic;
+}

@@ -1,0 +1,112 @@
+/* frontend/src/components/optimizer/BulletOptimizer.css */
+
+.bullet-opt {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+/* ── Current content ─────────────────────────────────────────────── */
+.bullet-opt__current {
+  background: #f9f9f9;
+  border: 1px solid #eeeeee;
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+}
+
+.bullet-opt__current-label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #bbb;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.bullet-opt__current-text {
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.bullet-opt__empty {
+  color: #ccc;
+  font-style: italic;
+}
+
+/* ── Optimize button ─────────────────────────────────────────────── */
+.bullet-opt__btn {
+  background: linear-gradient(135deg, #2196f3, #1976d2);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.65rem 1.4rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  align-self: flex-start;
+  box-shadow: 0 2px 8px rgba(33, 150, 243, 0.25);
+}
+
+.bullet-opt__btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(33, 150, 243, 0.35);
+}
+
+/* ── Error ────────────────────────────────────────────────────────── */
+.bullet-opt__error {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: #ffebee;
+  border: 1px solid #ffcdd2;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-size: 0.87rem;
+  color: #c62828;
+}
+
+.bullet-opt__retry-btn {
+  background: transparent;
+  border: 1px solid #f44336;
+  color: #f44336;
+  border-radius: 5px;
+  padding: 0.25rem 0.65rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  margin-left: auto;
+}
+
+/* ── Accepted ─────────────────────────────────────────────────────── */
+.bullet-opt__accepted {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: #e8f5e9;
+  border: 1px solid #c8e6c9;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-size: 0.88rem;
+  color: #2e7d32;
+  font-weight: 500;
+}
+
+.bullet-opt__accepted-icon {
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.bullet-opt__redo-btn {
+  background: transparent;
+  border: none;
+  color: #999;
+  font-size: 0.8rem;
+  cursor: pointer;
+  margin-left: auto;
+  text-decoration: underline;
+}

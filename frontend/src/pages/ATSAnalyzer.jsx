@@ -293,7 +293,9 @@ function ATSAnalyzer() {
     )}
     <button
       className="ats-results__improve-btn"
-      onClick={() => navigate('/resume-optimizer')}
+      onClick={() => navigate(
+  `/optimizer?resumeId=${selectedResume.id}&analysisId=${analysis.id}&mode=${analysis.analysis_type}`
+)}
     >
       ✏ Work on Your Resume →
     </button>

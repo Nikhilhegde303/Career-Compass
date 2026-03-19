@@ -6,6 +6,7 @@ import protectedRoutes from './src/routes/protectedRoutes.js';
 import resumeRoutes from './src/routes/resumeRoutes.js';
 import analysisRoutes from './src/routes/analysisRoutes.js';
 import errorHandler from './src/middleware/errorHandler.js';
+import optimizerRoutes from './src/routes/optimizerRoutes.js';
 
 
 // Load environment variables
@@ -39,6 +40,8 @@ app.use('/api/protected', protectedRoutes);
 app.use('/api/resumes', resumeRoutes);
 
 app.use('/api/analysis', analysisRoutes);
+
+app.use('/api/optimizer', optimizerRoutes);
 
 // 404 Handler for undefined routes - FIXED VERSION
 app.use((req, res) => {

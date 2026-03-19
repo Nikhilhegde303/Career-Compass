@@ -99,92 +99,94 @@
   font-size: 0.9rem;
 }
 
-/* ── Resume Cards Grid ───────────────────────────────────────────── */
+/* ── Resume Cards — GRID layout ──────────────────────────────────── */
 .resume-picker__grid {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
 }
 
 .resume-picker__card {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
+  flex-direction: column;
   background: #f9f9f9;
-  border: 1px solid #e8e8e8;
-  border-radius: 10px;
-  padding: 1rem 1.25rem;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  border: 2px solid #e8e8e8;
+  border-radius: 12px;
+  padding: 1.25rem;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+  cursor: pointer;
 }
 
 .resume-picker__card:hover {
   border-color: #90caf9;
-  box-shadow: 0 2px 8px rgba(33, 150, 243, 0.1);
+  box-shadow: 0 4px 16px rgba(33, 150, 243, 0.12);
+  transform: translateY(-2px);
 }
 
 .resume-picker__card-body {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  text-align: center;
   flex: 1;
-  min-width: 0;
+  margin-bottom: 1rem;
 }
 
 .resume-picker__card-icon {
-  font-size: 1.8rem;
-  flex-shrink: 0;
+  font-size: 2.2rem;
+  margin-bottom: 0.75rem;
 }
 
 .resume-picker__card-info {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
-  min-width: 0;
+  width: 100%;
 }
 
 .resume-picker__card-title {
-  font-size: 0.95rem;
-  font-weight: 600;
+  font-size: 0.92rem;
+  font-weight: 700;
   color: #333;
   margin: 0;
-  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .resume-picker__card-date {
-  font-size: 0.8rem;
-  color: #999;
+  font-size: 0.76rem;
+  color: #aaa;
 }
 
 .resume-picker__completeness {
   display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  margin-top: 0.25rem;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-top: 0.4rem;
 }
 
 .resume-picker__completeness-bar {
-  flex: 1;
-  max-width: 120px;
-  height: 5px;
+  width: 100%;
+  height: 4px;
   background: #e0e0e0;
-  border-radius: 3px;
+  border-radius: 2px;
   overflow: hidden;
 }
 
 .resume-picker__completeness-fill {
   height: 100%;
   background: #2196f3;
-  border-radius: 3px;
+  border-radius: 2px;
   transition: width 0.4s ease;
 }
 
 .resume-picker__completeness-label {
-  font-size: 0.78rem;
-  color: #999;
-  white-space: nowrap;
+  font-size: 0.72rem;
+  color: #bbb;
+  text-align: center;
 }
 
 .resume-picker__select-btn {
@@ -192,13 +194,12 @@
   color: #fff;
   border: none;
   border-radius: 8px;
-  padding: 0.55rem 1.1rem;
-  font-size: 0.88rem;
+  padding: 0.55rem 0;
+  font-size: 0.85rem;
   font-weight: 600;
   cursor: pointer;
-  white-space: nowrap;
+  width: 100%;
   transition: background 0.2s;
-  flex-shrink: 0;
 }
 
 .resume-picker__select-btn:hover {
@@ -246,4 +247,17 @@
   font-size: 0.83rem;
   color: #999;
   margin: 0;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .resume-picker__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 380px) {
+  .resume-picker__grid {
+    grid-template-columns: 1fr;
+  }
 }

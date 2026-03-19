@@ -1,0 +1,137 @@
+/* frontend/src/components/optimizer/BeforeAfterView.css */
+
+.before-after {
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 1rem;
+  animation: ba-slide-in 0.3s ease;
+}
+
+@keyframes ba-slide-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+/* ── Toggle ──────────────────────────────────────────────────────── */
+.before-after__toggle {
+  display: flex;
+  background: #f5f7fa;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.before-after__toggle-btn {
+  flex: 1;
+  padding: 0.6rem 0;
+  border: none;
+  background: transparent;
+  font-size: 0.83rem;
+  font-weight: 600;
+  color: #999;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-bottom: 2px solid transparent;
+}
+
+.before-after__toggle-btn:hover {
+  color: #555;
+}
+
+.before-after__toggle-btn--active {
+  color: #2196f3;
+  border-bottom-color: #2196f3;
+  background: #fff;
+}
+
+/* ── Content ─────────────────────────────────────────────────────── */
+.before-after__content {
+  padding: 1rem 1.25rem;
+  min-height: 80px;
+}
+
+.before-after__text {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.before-after__text--original {
+  color: #777;
+}
+
+.before-after__text--optimized {
+  color: #2e7d32;
+}
+
+.before-after__text--diff {
+  color: #333;
+}
+
+.before-after__highlight {
+  background: #fff9c4;
+  color: #e65100;
+  border-radius: 3px;
+  padding: 0 2px;
+  font-style: normal;
+}
+
+.before-after__empty {
+  color: #bbb;
+  font-style: italic;
+  font-size: 0.85rem;
+}
+
+/* ── Actions ─────────────────────────────────────────────────────── */
+.before-after__actions {
+  display: flex;
+  gap: 0.6rem;
+  padding: 0.9rem 1.25rem;
+  background: #fafafa;
+  border-top: 1px solid #f0f0f0;
+}
+
+.before-after__btn {
+  padding: 0.5rem 1.1rem;
+  border-radius: 7px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid transparent;
+}
+
+.before-after__btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.before-after__btn--accept {
+  background: #4caf50;
+  color: #fff;
+  border-color: #4caf50;
+}
+
+.before-after__btn--accept:hover:not(:disabled) {
+  background: #388e3c;
+}
+
+.before-after__btn--regenerate {
+  background: #fff;
+  color: #2196f3;
+  border-color: #2196f3;
+}
+
+.before-after__btn--regenerate:hover:not(:disabled) {
+  background: #e3f2fd;
+}
+
+.before-after__btn--discard {
+  background: #fff;
+  color: #999;
+  border-color: #e0e0e0;
+}
+
+.before-after__btn--discard:hover:not(:disabled) {
+  color: #f44336;
+  border-color: #f44336;
+}

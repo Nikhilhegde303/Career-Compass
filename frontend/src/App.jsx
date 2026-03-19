@@ -1,139 +1,69 @@
+// frontend/src/App.jsx
+
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import Landing from './pages/Landing';
-import ResumeEntry from './pages/ResumeEntry';
-import ResumeBuilder from './pages/ResumeBuilder';
-import ATSAnalyzer from './pages/ATSAnalyzer';
+import Login          from './pages/Login';
+import Register       from './pages/Register';
+import Landing        from './pages/Landing';
+import ResumeEntry    from './pages/ResumeEntry';
+import ResumeBuilder  from './pages/ResumeBuilder';
+import ATSAnalyzer    from './pages/ATSAnalyzer';
+import ResumeOptimizer from './pages/ResumeOptimizer';
 import ProtectedRoute from './components/ProtectedRoute';
-import { authUtils } from './utils/auth';
+import { authUtils }  from './utils/auth';
 import './App.css';
+
+// ── Must be defined BEFORE App so it's available when JSX is parsed ──
+const ComingSoonPage = ({ title }) => (
+  <div className="coming-soon-page">
+    <div className="coming-soon-card">
+      <div className="coming-soon-icon">🚧</div>
+      <h2 className="coming-soon-title">{title}</h2>
+      <p className="coming-soon-desc">
+        We're building this feature for you! Check back soon for updates.
+      </p>
+      <a href="/dashboard" className="coming-soon-btn">
+        ← Back to Home
+      </a>
+    </div>
+  </div>
+);
 
 function App() {
   return (
     <Router>
       <Routes>
         {/* Public routes */}
-        <Route path="/login" element={<Login />} />
+        <Route path="/login"    element={<Login />}    />
         <Route path="/register" element={<Register />} />
 
-        {/* Protected routes */}
+        {/* All protected routes */}
         <Route element={<ProtectedRoute />}>
-  <Route path="/dashboard" element={<Landing />} />
-  <Route path="/resume" element={<ResumeEntry />} />
-  <Route path="/resume-builder" element={<ResumeBuilder />} />
+          <Route path="/dashboard"          element={<Landing />}         />
+          <Route path="/resume"             element={<ResumeEntry />}     />
+          <Route path="/resume-builder"     element={<ResumeBuilder />}   />
+          <Route path="/ats-analyzer"       element={<ATSAnalyzer />}     />
+          <Route path="/resume/:id/analyze" element={<ATSAnalyzer />}     />
+          <Route path="/optimizer"          element={<ResumeOptimizer />} />
+          <Route path="/job-matching"       element={<ComingSoonPage title="Role & Job Matching" />}     />
+          <Route path="/insights"           element={<ComingSoonPage title="Suggestions & Insights" />} />
+        </Route>
 
-  {/* ADD THESE TWO LINES HERE */}
-  <Route path="/ats-analyzer" element={<ATSAnalyzer />} />
-  <Route path="/resume/:id/analyze" element={<ATSAnalyzer />} />
-</Route>
-
-
-        {/* Coming Soon - Placeholder Routes */}
-        <Route
-          path="/resume-optimizer"
-          element={
-            <ProtectedRoute>
-              <ComingSoonPage title="Resume Optimizer" />
-            </ProtectedRoute>
-          }
-        />
-
-
-
-        <Route
-          path="/job-matching"
-          element={
-            <ProtectedRoute>
-              <ComingSoonPage title="Role & Job Matching" />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/insights"
-          element={
-            <ProtectedRoute>
-              <ComingSoonPage title="Suggestions & Insights" />
-            </ProtectedRoute>
-          }
-        />
-
-        {/* Redirect root to dashboard if authenticated, else to login */}
+        {/* Root redirect */}
         <Route
           path="/"
           element={
             authUtils.isAuthenticated()
               ? <Navigate to="/dashboard" replace />
-              : <Navigate to="/login" replace />
+              : <Navigate to="/login"    replace />
           }
         />
 
-        {/* 404 route */}
+        {/* 404 */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>
   );
 }
-
-// Simple Coming Soon Component (inline)
-const ComingSoonPage = ({ title }) => {
-  return (
-    <div style={{
-      minHeight: '100vh',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      background: 'linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%)',
-      padding: '2rem'
-    }}>
-      <div style={{
-        background: 'white',
-        borderRadius: '16px',
-        padding: '3rem',
-        boxShadow: '0 4px 16px rgba(0, 0, 0, 0.1)',
-        textAlign: 'center',
-        maxWidth: '500px'
-      }}>
-        <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>🚧</div>
-        <h2 style={{
-          fontSize: '2rem',
-          fontWeight: '700',
-          color: '#1a1a1a',
-          marginBottom: '1rem'
-        }}>
-          {title}
-        </h2>
-        <p style={{
-          fontSize: '1.1rem',
-          color: '#666',
-          marginBottom: '2rem',
-          lineHeight: '1.6'
-        }}>
-          We're building this feature for you! Check back soon for updates.
-        </p>
-        <a
-          href="/dashboard"
-          style={{
-            display: 'inline-block',
-            background: '#2196f3',
-            color: 'white',
-            padding: '0.75rem 2rem',
-            borderRadius: '8px',
-            textDecoration: 'none',
-            fontWeight: '600',
-            transition: 'all 0.2s'
-          }}
-          onMouseOver={(e) => e.target.style.background = '#1976d2'}
-          onMouseOut={(e) => e.target.style.background = '#2196f3'}
-        >
-          ← Back to Home
-        </a>
-      </div>
-    </div>
-  );
-};
 
 export default App;

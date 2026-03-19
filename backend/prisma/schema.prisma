@@ -25,6 +25,8 @@ model User {
 
   analyses  Analysis[]
 
+  optimizations ResumeOptimization[]
+
   @@index([email])
   @@index([role])
   @@index([created_at])
@@ -42,6 +44,8 @@ model Resume {
   updated_at DateTime @updatedAt
 
   analyses  Analysis[]
+
+  optimizations ResumeOptimization[]
   
   user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
   
@@ -95,4 +99,26 @@ model Analysis {
   @@index([resume_id])
   @@index([user_id])
   @@map("analysis_results")
+}
+
+
+
+model ResumeOptimization {
+  id          String   @id @default(uuid())
+  resume_id   String
+  user_id     String
+  analysis_id String?
+  section     String   // "summary" | "experience" | "skills" | "projects"
+  original    String
+  optimized   String
+  mode        String   // "health" | "job_match"
+  accepted    Boolean  @default(false)
+  created_at  DateTime @default(now())
+
+  resume Resume @relation(fields: [resume_id], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [user_id],   references: [id], onDelete: Cascade)
+
+  @@index([resume_id])
+  @@index([user_id])
+  @@map("resume_optimizations")
 }

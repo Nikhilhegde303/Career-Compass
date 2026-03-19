@@ -26,9 +26,9 @@ const FEATURES = [
     icon: '✨',
     title: 'Resume Optimizer',
     description: 'Tailor your resume for specific jobs with AI-powered suggestions',
-    route: '/resume-optimizer',
+    route: '/optimizer',
     ctaText: 'Optimize Resume',
-    status: 'coming-soon'
+    status: 'active'
   },
   {
     icon: '🔍',
