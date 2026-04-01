@@ -24,6 +24,7 @@
     "jsonwebtoken": "^9.0.3",
     "mammoth": "^1.11.0",
     "multer": "^2.0.2",
+    "natural": "^8.1.1",
     "pdfjs-dist": "^5.4.624",
     "prisma": "^6.19.2"
   },
@@ -32,6 +33,8 @@
     "nodemon": "^3.1.11"
   },
   "nodemonConfig": {
-  "watch": ["src"]  
-}
+    "watch": [
+      "src"
+    ]
+  }
 }

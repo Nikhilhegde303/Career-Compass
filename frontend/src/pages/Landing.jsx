@@ -34,18 +34,18 @@ const FEATURES = [
     icon: '🔍',
     title: 'Role & Job Matching',
     description: 'Discover roles and job openings that match your skills and experience',
-    route: '/job-matching',
+    route: '/role-matching',
     ctaText: 'Discover Roles',
-    status: 'coming-soon'
-  },
-  {
-    icon: '💡',
-    title: 'Suggestions & Insights',
-    description: 'Get actionable recommendations to improve your career profile',
-    route: '/insights',
-    ctaText: 'View Suggestions',
-    status: 'coming-soon'
-  }
+    status: 'active'
+   }
+  // {
+  //   icon: '💡',
+  //   title: 'Suggestions & Insights',
+  //   description: 'Get actionable recommendations to improve your career profile',
+  //   route: '/insights',
+  //   ctaText: 'View Suggestions',
+  //   status: 'coming-soon'
+  // }
 ];
 
 const HOW_IT_HELPS = [

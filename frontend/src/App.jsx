@@ -9,6 +9,7 @@ import ResumeEntry    from './pages/ResumeEntry';
 import ResumeBuilder  from './pages/ResumeBuilder';
 import ATSAnalyzer    from './pages/ATSAnalyzer';
 import ResumeOptimizer from './pages/ResumeOptimizer';
+import RoleMatching from './pages/RoleMatching';
 import ProtectedRoute from './components/ProtectedRoute';
 import { authUtils }  from './utils/auth';
 import './App.css';
@@ -45,8 +46,9 @@ function App() {
           <Route path="/ats-analyzer"       element={<ATSAnalyzer />}     />
           <Route path="/resume/:id/analyze" element={<ATSAnalyzer />}     />
           <Route path="/optimizer"          element={<ResumeOptimizer />} />
-          <Route path="/job-matching"       element={<ComingSoonPage title="Role & Job Matching" />}     />
-          <Route path="/insights"           element={<ComingSoonPage title="Suggestions & Insights" />} />
+          <Route path="/role-matching" element={<RoleMatching />} />
+          {/* <Route path="/job-matching"       element={<ComingSoonPage title="Role & Job Matching" />}     />
+          <Route path="/insights"           element={<ComingSoonPage title="Suggestions & Insights" />} /> */}
         </Route>
 
         {/* Root redirect */}
